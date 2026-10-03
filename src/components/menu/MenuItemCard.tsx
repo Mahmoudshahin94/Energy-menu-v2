@@ -16,14 +16,14 @@ interface MenuItemCardProps {
 
 /* Warm gradient palettes cycled by index for items without images */
 const PLACEHOLDERS = [
-  { from: "#FFF3E8", to: "#FFD9B0", emoji: "☕" },
-  { from: "#FFF8E1", to: "#FFE082", emoji: "🍵" },
-  { from: "#FBE9E7", to: "#FFAB91", emoji: "🥤" },
-  { from: "#F3E5F5", to: "#CE93D8", emoji: "🧋" },
-  { from: "#E8F5E9", to: "#A5D6A7", emoji: "🍹" },
-  { from: "#E3F2FD", to: "#90CAF9", emoji: "🧃" },
-  { from: "#FCE4EC", to: "#F48FB1", emoji: "🍸" },
-  { from: "#E0F7FA", to: "#80DEEA", emoji: "🍰" },
+  { from: "#EAF7DD", to: "#BDE59A", emoji: "🥗" },
+  { from: "#FFF1DE", to: "#FFD39B", emoji: "🍗" },
+  { from: "#F1F8E9", to: "#C5E1A5", emoji: "🥪" },
+  { from: "#FFF3E0", to: "#FFCC80", emoji: "🍔" },
+  { from: "#E8F5E9", to: "#A5D6A7", emoji: "🍝" },
+  { from: "#FFF8E1", to: "#FFE082", emoji: "🧃" },
+  { from: "#E0F2E9", to: "#9ED8B8", emoji: "🐟" },
+  { from: "#FBE9E0", to: "#F4B393", emoji: "🥩" },
 ];
 
 export default function MenuItemCard({ item, index, category, itemImages }: MenuItemCardProps) {

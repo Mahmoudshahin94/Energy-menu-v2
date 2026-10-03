@@ -4,30 +4,46 @@
 
 /* ─── Design Tokens ──────────────────────────────── */
 :root {
-  --color-bg: #FAFAF7;
+  --color-bg: #F6FAF2;
   --color-surface: #FFFFFF;
-  --color-surface-2: #F5EDE0;
-  --color-border: #EDE5D8;
-  --color-ink: #1A0E07;
-  --color-ink-2: #7A6355;
-  --color-ink-3: #B09A85;
-  --color-primary: #CC0000;
-  --color-primary-dark: #AA0000;
+  --color-surface-2: #EAF3E1;
+  --color-border: #D8E6CB;
+  --color-ink: #121A0E;
+  --color-ink-2: #55664A;
+  --color-ink-3: #8A9C7E;
+  --color-primary: #3A9D12;
+  --color-primary-dark: #2C7C0D;
+  --color-accent: #F7941D;
 
   --header-height: 64px;
   --categories-height: 148px;
 }
 
 .dark {
-  --color-bg: #0F0A07;
-  --color-surface: #1C1007;
-  --color-surface-2: #2C1A0E;
-  --color-border: #3D2A1A;
-  --color-ink: #F5EAD7;
-  --color-ink-2: #C4A480;
-  --color-ink-3: #8A6E52;
-  --color-primary: #E53535;
-  --color-primary-dark: #FF4444;
+  --color-bg: #101310;
+  --color-surface: #1A1E19;
+  --color-surface-2: #242A22;
+  --color-border: #33402F;
+  --color-ink: #F1F7EB;
+  --color-ink-2: #B4C4A6;
+  --color-ink-3: #7E9070;
+  --color-primary: #62C71E;
+  --color-primary-dark: #7EDB3A;
+  --color-accent: #FFA52E;
+}
+
+/* Admin panel is always light, regardless of the public menu theme */
+.admin-light {
+  --color-bg: #F6FAF2;
+  --color-surface: #FFFFFF;
+  --color-surface-2: #EAF3E1;
+  --color-border: #D8E6CB;
+  --color-ink: #121A0E;
+  --color-ink-2: #55664A;
+  --color-ink-3: #8A9C7E;
+  --color-primary: #3A9D12;
+  --color-primary-dark: #2C7C0D;
+  color: var(--color-ink);
 }
 
 /* ─── Base ──────────────────────────────────────── */
@@ -70,26 +86,26 @@ body {
 
 /* ─── Glass header ───────────────────────────────── */
 .glass-header {
-  background: rgba(250, 250, 247, 0.88);
+  background: rgba(246, 250, 242, 0.88);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(237, 229, 216, 0.8);
+  border-bottom: 1px solid rgba(216, 230, 203, 0.8);
 }
 .dark .glass-header {
-  background: rgba(15, 10, 7, 0.88);
-  border-bottom: 1px solid rgba(61, 42, 26, 0.8);
+  background: rgba(16, 19, 16, 0.88);
+  border-bottom: 1px solid rgba(51, 64, 47, 0.8);
 }
 
 /* ─── Hero section ───────────────────────────────── */
 .hero-section {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(180deg, #FEF9F0 0%, #FAF5EB 50%, #FAF7F2 80%, transparent 100%);
+  background: linear-gradient(180deg, #EEF8E4 0%, #F2F9EB 50%, #F6FAF2 80%, transparent 100%);
   padding-top: 2.5rem;
   padding-bottom: 2rem;
 }
 .dark .hero-section {
-  background: linear-gradient(180deg, #1E120A 0%, #170D06 50%, #110A04 80%, transparent 100%);
+  background: linear-gradient(180deg, #182016 0%, #131913 50%, #101310 80%, transparent 100%);
 }
 
 /* Decorative circles in hero */
@@ -110,12 +126,12 @@ body {
   align-items: center;
   justify-content: center;
   position: relative;
-  /* Subtle warm glow ring — no white background needed (logo is transparent) */
-  background: radial-gradient(circle at center, rgba(204, 80, 20, 0.08) 0%, transparent 75%);
+  /* Subtle green glow ring — no white background needed (logo is transparent) */
+  background: radial-gradient(circle at center, rgba(98, 199, 30, 0.10) 0%, transparent 75%);
   animation: heroLogoIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 .dark .hero-logo-wrap {
-  background: radial-gradient(circle at center, rgba(204, 60, 20, 0.15) 0%, transparent 75%);
+  background: radial-gradient(circle at center, rgba(98, 199, 30, 0.16) 0%, transparent 75%);
 }
 
 /* Compact logo in header */
@@ -136,10 +152,10 @@ body {
 }
 .menu-card:hover {
   transform: translateY(-6px) scale(1.015);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.13), 0 4px 12px rgba(204, 0, 0, 0.06);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.13), 0 4px 12px rgba(58, 157, 18, 0.08);
 }
 .dark .menu-card:hover {
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55), 0 4px 12px rgba(204, 0, 0, 0.15);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55), 0 4px 12px rgba(98, 199, 30, 0.18);
 }
 .menu-card:active {
   transform: scale(0.97);
@@ -174,7 +190,7 @@ body {
 }
 .cat-card.active {
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(204, 0, 0, 0.15), 0 8px 24px rgba(204, 0, 0, 0.2);
+  box-shadow: 0 0 0 3px rgba(98, 199, 30, 0.18), 0 8px 24px rgba(204, 0, 0, 0.2);
   transform: translateY(-2px) scale(1.04);
 }
 
@@ -242,7 +258,7 @@ body {
 .img-overlay {
   background: linear-gradient(
     to top,
-    rgba(20, 10, 5, 0.35) 0%,
+    rgba(10, 16, 8, 0.35) 0%,
     transparent 60%
   );
 }

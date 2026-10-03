@@ -34,7 +34,7 @@ export default function QRCodePage() {
     ctx.drawImage(canvas, padding, padding);
 
     const link = document.createElement("a");
-    link.download = "judytech-menu-qr.png";
+    link.download = "energy-menu-qr.png";
     link.href = paddedCanvas.toDataURL("image/png");
     link.click();
   }, []);
@@ -61,7 +61,7 @@ export default function QRCodePage() {
                 size={220}
                 level="H"
                 includeMargin={false}
-                fgColor="#1A1A1A"
+                fgColor="#141714"
                 bgColor="#FFFFFF"
                 imageSettings={{
                   src: "/logo.png",
@@ -74,7 +74,7 @@ export default function QRCodePage() {
               />
             </div>
             <div className="text-center">
-              <p className="font-bold text-brand-dark text-lg">JudyTech</p>
+              <p className="font-bold text-gray-800 text-lg">Energy</p>
               <p className="text-gray-400 text-sm">امسح الرمز لعرض القائمة</p>
             </div>
           </div>

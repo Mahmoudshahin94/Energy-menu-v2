@@ -1,12 +1,12 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { id } from "@instantdb/react";
 import Image from "next/image";
 import AdminLayout from "@/components/admin/AdminLayout";
 import Modal from "@/components/admin/Modal";
 import ItemForm from "@/components/admin/ItemForm";
-import { db } from "@/lib/db";
+import { useMenuData } from "@/lib/useMenuData";
+import { createRow, updateRow, deleteRow } from "@/lib/adminApi";
 import type { MenuItem, Category, ItemImage } from "@/types";
 import type { ManagedImage } from "@/components/admin/MultiImageUpload";
 
@@ -17,11 +17,7 @@ export default function ItemsPage() {
   const [filterCategory, setFilterCategory] = useState<string>("");
   const [search, setSearch] = useState("");
 
-  const { data, isLoading } = db.useQuery({
-    categories: {},
-    items: {},
-    item_images: {},
-  });
+  const { data, isLoading } = useMenuData();
 
   const categories: Category[] = useMemo(() => data?.categories ?? [], [data?.categories]);
   const allItems: MenuItem[] = useMemo(() => data?.items ?? [], [data?.items]);
@@ -50,41 +46,8 @@ export default function ItemsPage() {
     });
   }, [allItems, filterCategory, search, categories]);
 
-  /**
-   * Syncs item_images in InstantDB for a given item:
-   * - Deletes rows that are no longer in the managed list
-   * - Creates or updates rows based on the managed list
-   */
-  const syncItemImages = async (itemId: string, managedImages: ManagedImage[]) => {
-    const existing = allItemImages.filter((img) => img.item_id === itemId);
-    const txns = [];
-
-    // Delete images that were removed
-    for (const ex of existing) {
-      const stillPresent = managedImages.some((m) => m.key === ex.id);
-      if (!stillPresent) {
-        txns.push(db.tx.item_images[ex.id].delete());
-      }
-    }
-
-    // Upsert remaining / new images
-    for (let i = 0; i < managedImages.length; i++) {
-      const m = managedImages[i];
-      const rowId = m.key === "legacy" || !existing.some((e) => e.id === m.key) ? id() : m.key;
-      txns.push(
-        db.tx.item_images[rowId].update({
-          item_id: itemId,
-          image: m.url,
-          is_primary: m.isPrimary,
-          order: i,
-        })
-      );
-    }
-
-    if (txns.length > 0) {
-      await db.transact(txns);
-    }
-  };
+  const toImagePayload = (images: ManagedImage[]) =>
+    images.map((m) => ({ url: m.url, isPrimary: m.isPrimary }));
 
   const handleAdd = async (
     formData: {
@@ -100,34 +63,21 @@ export default function ItemsPage() {
     },
     images: ManagedImage[]
   ) => {
-    const newId = id();
     const primaryImage = images.find((m) => m.isPrimary)?.url ?? images[0]?.url ?? "";
 
-    await db.transact([
-      db.tx.items[newId].update({
-        name_en: formData.name_en,
-        name_ar: formData.name_ar,
-        description_en: formData.description_en ?? "",
-        description_ar: formData.description_ar ?? "",
-        price_small: formData.price_small,
-        price_large: formData.price_large,
-        image: primaryImage,
-        available: formData.available,
-        order: formData.order,
-        category_id: formData.category_id ?? "",
-      }),
-    ]);
-
-    // Save item_images separately (need the newId)
-    const imgTxns = images.map((m, i) =>
-      db.tx.item_images[id()].update({
-        item_id: newId,
-        image: m.url,
-        is_primary: m.isPrimary,
-        order: i,
-      })
-    );
-    if (imgTxns.length > 0) await db.transact(imgTxns);
+    await createRow("items", {
+      name_en: formData.name_en,
+      name_ar: formData.name_ar,
+      description_en: formData.description_en ?? "",
+      description_ar: formData.description_ar ?? "",
+      price_small: formData.price_small,
+      price_large: formData.price_large,
+      image: primaryImage,
+      available: formData.available,
+      order: formData.order,
+      category_id: formData.category_id ?? "",
+      images: toImagePayload(images),
+    });
 
     setShowAdd(false);
   };
@@ -149,22 +99,20 @@ export default function ItemsPage() {
     if (!editItem) return;
     const primaryImage = images.find((m) => m.isPrimary)?.url ?? images[0]?.url ?? "";
 
-    await db.transact([
-      db.tx.items[editItem.id].update({
-        name_en: formData.name_en,
-        name_ar: formData.name_ar,
-        description_en: formData.description_en ?? "",
-        description_ar: formData.description_ar ?? "",
-        price_small: formData.price_small,
-        price_large: formData.price_large,
-        image: primaryImage,
-        available: formData.available,
-        order: formData.order,
-        category_id: formData.category_id ?? "",
-      }),
-    ]);
+    await updateRow("items", editItem.id, {
+      name_en: formData.name_en,
+      name_ar: formData.name_ar,
+      description_en: formData.description_en ?? "",
+      description_ar: formData.description_ar ?? "",
+      price_small: formData.price_small,
+      price_large: formData.price_large,
+      image: primaryImage,
+      available: formData.available,
+      order: formData.order,
+      category_id: formData.category_id ?? "",
+      images: toImagePayload(images),
+    });
 
-    await syncItemImages(editItem.id, images);
     setEditItem(null);
   };
 
@@ -172,21 +120,12 @@ export default function ItemsPage() {
     if (!confirm("Delete this menu item?")) return;
     setDeletingId(itemId);
 
-    const imgTxns = allItemImages
-      .filter((img) => img.item_id === itemId)
-      .map((img) => db.tx.item_images[img.id].delete());
-
-    await db.transact([
-      ...imgTxns,
-      db.tx.items[itemId].delete(),
-    ]);
+    await deleteRow("items", itemId);
     setDeletingId(null);
   };
 
   const handleToggleAvailable = async (item: MenuItem) => {
-    await db.transact([
-      db.tx.items[item.id].update({ available: !item.available }),
-    ]);
+    await updateRow("items", item.id, { available: !item.available });
   };
 
   const getItemThumbnail = (item: MenuItem): string | null => {
@@ -300,7 +239,7 @@ export default function ItemsPage() {
                               </div>
                             ) : (
                               <div className="w-10 h-10 rounded-lg bg-brand-cream flex items-center justify-center flex-shrink-0">
-                                <span className="text-lg">☕</span>
+                                <span className="text-lg">🥗</span>
                               </div>
                             )}
                             <div>

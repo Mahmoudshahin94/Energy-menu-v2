@@ -1,5 +1,5 @@
 {
-  "name": "menu-app",
+  "name": "energy-menu",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -7,13 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "migrate:instantdb": "tsx scripts/instant-migrate.ts",
-    "migrate:instantdb:dry": "tsx scripts/instant-migrate.ts --dry-run",
-    "seed:db": "node --env-file=.env.local scripts/seed.mjs"
+    "seed:db": "node --env-file=.env.local scripts/seed-energy.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
-    "@instantdb/react": "^0.22.142",
+    "@neondatabase/serverless": "^1.2.0",
+    "@vercel/blob": "^2.8.0",
     "framer-motion": "^12.34.3",
     "next": "14.2.35",
     "next-auth": "^4.24.13",
@@ -24,7 +23,6 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
-    "@instantdb/admin": "^0.22.142",
     "@types/node": "^20",
     "@types/qrcode": "^1.5.6",
     "@types/react": "^18",
@@ -32,6 +30,8 @@
     "eslint": "^8",
     "eslint-config-next": "14.2.35",
     "postcss": "^8",
+    "qrcode": "^1.5.4",
+    "sharp": "^0.35.5",
     "tailwindcss": "^3.4.1",
     "tsx": "^4.21.0",
     "typescript": "^5"

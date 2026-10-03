@@ -1,26 +1,15 @@
-import { init } from "@instantdb/react";
-import schema from "../../instant.schema";
+import { neon, type NeonQueryFunction } from "@neondatabase/serverless";
 
-/** Retired app — still used in some env files / deployments; always use the new app instead. */
-const LEGACY_INSTANT_APP_ID = "254b5091-5192-46ff-b314-ae031e8e0607";
+let client: NeonQueryFunction<false, false> | null = null;
 
-const DEFAULT_INSTANT_APP_ID = "4a86cbee-44d0-49db-b911-09c3a6985bf4";
-
-const fromEnv = process.env.NEXT_PUBLIC_INSTANTDB_APP_ID?.trim();
-const APP_ID =
-  !fromEnv || fromEnv === LEGACY_INSTANT_APP_ID
-    ? DEFAULT_INSTANT_APP_ID
-    : fromEnv;
-
-if (
-  process.env.NODE_ENV === "development" &&
-  fromEnv === LEGACY_INSTANT_APP_ID
-) {
-  console.warn(
-    `[db] NEXT_PUBLIC_INSTANTDB_APP_ID is the legacy app; using ${DEFAULT_INSTANT_APP_ID} instead.`,
-  );
+/** Lazy Neon client — server-side only (uses DATABASE_URL). */
+export function getSql(): NeonQueryFunction<false, false> {
+  if (!client) {
+    const url = process.env.DATABASE_URL?.trim();
+    if (!url) throw new Error("DATABASE_URL is not set");
+    // Next.js caches global fetch() results; the Neon HTTP driver uses fetch, so opt out
+    // or reads would return stale rows after admin edits.
+    client = neon(url, { fetchOptions: { cache: "no-store" } });
+  }
+  return client;
 }
-
-export const db = init({ appId: APP_ID, schema });
-
-export type DB = typeof db;

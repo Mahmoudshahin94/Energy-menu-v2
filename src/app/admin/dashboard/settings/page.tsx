@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { id } from "@instantdb/react";
 import Image from "next/image";
 import AdminLayout from "@/components/admin/AdminLayout";
-import { db } from "@/lib/db";
+import { useMenuData } from "@/lib/useMenuData";
+import { saveSettings } from "@/lib/adminApi";
 
 interface Setting {
   id: string;
@@ -13,7 +13,7 @@ interface Setting {
 }
 
 export default function SettingsPage() {
-  const { data, isLoading } = db.useQuery({ settings: {} });
+  const { data, isLoading } = useMenuData();
 
   const [logoUrl, setLogoUrl] = useState("");
   const [defaultLang, setDefaultLang] = useState("ar");
@@ -38,39 +38,19 @@ export default function SettingsPage() {
   const handleSave = async () => {
     setSaving(true);
     setSaved(false);
-    const settings: Setting[] = data?.settings ?? [];
-
-    const logoSetting = settings.find((s) => s.key === "logo");
-    const langSetting = settings.find((s) => s.key === "default_lang");
-    const intervalSetting = settings.find((s) => s.key === "carousel_interval");
-
     const clampedSec = Math.min(30, Math.max(2, carouselSec));
-    const intervalMs = String(clampedSec * 1000);
 
-    const transactions = [];
-
-    if (logoSetting) {
-      transactions.push(db.tx.settings[logoSetting.id].update({ value: logoUrl }));
-    } else {
-      const newId = id();
-      transactions.push(db.tx.settings[newId].update({ key: "logo", value: logoUrl }));
+    try {
+      await saveSettings({
+        logo: logoUrl,
+        default_lang: defaultLang,
+        carousel_interval: String(clampedSec * 1000),
+      });
+    } catch (err) {
+      alert(err instanceof Error ? err.message : "Failed to save settings");
+      setSaving(false);
+      return;
     }
-
-    if (langSetting) {
-      transactions.push(db.tx.settings[langSetting.id].update({ value: defaultLang }));
-    } else {
-      const newId = id();
-      transactions.push(db.tx.settings[newId].update({ key: "default_lang", value: defaultLang }));
-    }
-
-    if (intervalSetting) {
-      transactions.push(db.tx.settings[intervalSetting.id].update({ value: intervalMs }));
-    } else {
-      const newId = id();
-      transactions.push(db.tx.settings[newId].update({ key: "carousel_interval", value: intervalMs }));
-    }
-
-    await db.transact(transactions);
     setSaving(false);
     setSaved(true);
     setTimeout(() => setSaved(false), 3000);
@@ -82,7 +62,7 @@ export default function SettingsPage() {
         <div className="mb-6">
           <h2 className="text-xl font-bold text-gray-800">Settings</h2>
           <p className="text-sm text-gray-500 mt-0.5">
-            Configure your coffee shop branding and preferences
+            Configure your restaurant branding and preferences
           </p>
         </div>
 
@@ -100,7 +80,7 @@ export default function SettingsPage() {
                 Logo URL
               </label>
               <p className="text-xs text-gray-400 mb-3">
-                Paste a URL to your logo image. Leave empty to use the default JudyTech logo.
+                Paste a URL to your logo image. Leave empty to use the default Energy logo.
               </p>
 
               {/* Preview */}
@@ -124,7 +104,7 @@ export default function SettingsPage() {
                   )}
                 </div>
                 <p className="text-xs text-gray-400">
-                  {logoUrl ? "Custom logo" : "Default JudyTech logo"}
+                  {logoUrl ? "Custom logo" : "Default Energy logo"}
                 </p>
               </div>
 

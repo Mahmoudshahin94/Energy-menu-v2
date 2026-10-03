@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { id } from "@instantdb/react";
 import AdminLayout from "@/components/admin/AdminLayout";
 import Modal from "@/components/admin/Modal";
 import BannerForm from "@/components/admin/BannerForm";
-import { db } from "@/lib/db";
+import { useMenuData } from "@/lib/useMenuData";
+import { createRow, updateRow, deleteRow } from "@/lib/adminApi";
 import type { Banner } from "@/types";
 
 interface BannerFormData {
@@ -25,56 +25,49 @@ export default function BannersPage() {
   const [editBanner, setEditBanner] = useState<Banner | null>(null);
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
-  const { data, isLoading } = db.useQuery({ banners: {} });
+  const { data, isLoading } = useMenuData();
   const banners: Banner[] = data?.banners
-    ? [...data.banners].sort((a: Banner, b: Banner) => a.order - b.order)
+    ? [...data.banners].sort((a, b) => a.order - b.order)
     : [];
 
   const handleAdd = async (formData: BannerFormData) => {
-    const newId = id();
-    await db.transact([
-      db.tx.banners[newId].update({
-        title_en: formData.title_en,
-        title_ar: formData.title_ar,
-        subtitle_en: formData.subtitle_en,
-        subtitle_ar: formData.subtitle_ar,
-        image: formData.image,
-        link: formData.link,
-        order: formData.order,
-        active: formData.active,
-      }),
-    ]);
+    await createRow("banners", {
+      title_en: formData.title_en,
+      title_ar: formData.title_ar,
+      subtitle_en: formData.subtitle_en,
+      subtitle_ar: formData.subtitle_ar,
+      image: formData.image,
+      link: formData.link,
+      order: formData.order,
+      active: formData.active,
+    });
     setShowAdd(false);
   };
 
   const handleEdit = async (formData: BannerFormData) => {
     if (!editBanner) return;
-    await db.transact([
-      db.tx.banners[editBanner.id].update({
-        title_en: formData.title_en,
-        title_ar: formData.title_ar,
-        subtitle_en: formData.subtitle_en,
-        subtitle_ar: formData.subtitle_ar,
-        image: formData.image,
-        link: formData.link,
-        order: formData.order,
-        active: formData.active,
-      }),
-    ]);
+    await updateRow("banners", editBanner.id, {
+      title_en: formData.title_en,
+      title_ar: formData.title_ar,
+      subtitle_en: formData.subtitle_en,
+      subtitle_ar: formData.subtitle_ar,
+      image: formData.image,
+      link: formData.link,
+      order: formData.order,
+      active: formData.active,
+    });
     setEditBanner(null);
   };
 
   const handleDelete = async (bannerId: string) => {
     if (!confirm("Delete this banner?")) return;
     setDeletingId(bannerId);
-    await db.transact([db.tx.banners[bannerId].delete()]);
+    await deleteRow("banners", bannerId);
     setDeletingId(null);
   };
 
   const handleToggleActive = async (banner: Banner) => {
-    await db.transact([
-      db.tx.banners[banner.id].update({ active: !banner.active }),
-    ]);
+    await updateRow("banners", banner.id, { active: !banner.active });
   };
 
   return (

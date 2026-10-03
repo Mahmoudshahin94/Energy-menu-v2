@@ -18,41 +18,33 @@ interface CategoryTabsProps {
    Dimensions are small (300px) for fast loading.
 */
 const PHOTO_BY_NAME: Record<string, string> = {
-  "hot":     "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=300&q=80",
-  "cold":    "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=300&q=80",
-  "iced":    "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=300&q=80",
-  "milk":    "https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=300&q=80",
-  "shake":   "https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=300&q=80",
-  "smoothi": "https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=300&q=80",
-  "juice":   "https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=300&q=80",
-  "عصير":    "https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=300&q=80",
-  "cocktail":"https://images.unsplash.com/photo-1536935338788-846bb9981813?w=300&q=80",
-  "كوكتيل":  "https://images.unsplash.com/photo-1536935338788-846bb9981813?w=300&q=80",
-  "mojito":  "https://images.unsplash.com/photo-1587223962930-cb7f31384c19?w=300&q=80",
-  "موهيتو":  "https://images.unsplash.com/photo-1587223962930-cb7f31384c19?w=300&q=80",
-  "sweet":   "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=300&q=80",
-  "حلو":     "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=300&q=80",
-  "dessert": "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=300&q=80",
-  "coffee":  "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=300&q=80",
-  "قهوة":    "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=300&q=80",
-  "tea":     "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=300&q=80",
-  "شاي":     "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=300&q=80",
-  "سموثي":   "https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=300&q=80",
-  "ميلك":    "https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=300&q=80",
-  "مشروب":   "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=300&q=80",
+  "sandwich": "https://images.unsplash.com/photo-1621852004158-f3bc188ace2d?w=300&q=80",
+  "ساندويش": "https://images.unsplash.com/photo-1621852004158-f3bc188ace2d?w=300&q=80",
+  "burger": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=300&q=80",
+  "برغر": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=300&q=80",
+  "chicken": "https://images.unsplash.com/photo-1762631934518-f75e233413ca?w=300&q=80",
+  "دجاج": "https://images.unsplash.com/photo-1762631934518-f75e233413ca?w=300&q=80",
+  "meat": "https://images.unsplash.com/photo-1706650616334-97875fae8521?w=300&q=80",
+  "لحوم": "https://images.unsplash.com/photo-1706650616334-97875fae8521?w=300&q=80",
+  "noodle": "https://images.unsplash.com/photo-1565628308934-c731959645f2?w=300&q=80",
+  "نودلز": "https://images.unsplash.com/photo-1565628308934-c731959645f2?w=300&q=80",
+  "fish": "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=300&q=80",
+  "أسماك": "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=300&q=80",
+  "salad": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=300&q=80",
+  "سلطة": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=300&q=80",
+  "juice": "https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=300&q=80",
+  "عصائر": "https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=300&q=80",
 };
 
 const PHOTO_BY_EMOJI: Record<string, string> = {
-  "☕": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=300&q=80",
-  "🍵": "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=300&q=80",
-  "🥤": "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=300&q=80",
-  "🧋": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=300&q=80",
-  "🍹": "https://images.unsplash.com/photo-1587223962930-cb7f31384c19?w=300&q=80",
-  "🍸": "https://images.unsplash.com/photo-1536935338788-846bb9981813?w=300&q=80",
-  "🍊": "https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=300&q=80",
-  "🍰": "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=300&q=80",
-  "🍫": "https://images.unsplash.com/photo-1548907040-4baa42d10919?w=300&q=80",
-  "🧁": "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=300&q=80",
+  "🥪": "https://images.unsplash.com/photo-1621852004158-f3bc188ace2d?w=300&q=80",
+  "🍔": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=300&q=80",
+  "🍗": "https://images.unsplash.com/photo-1762631934518-f75e233413ca?w=300&q=80",
+  "🥩": "https://images.unsplash.com/photo-1706650616334-97875fae8521?w=300&q=80",
+  "🍝": "https://images.unsplash.com/photo-1565628308934-c731959645f2?w=300&q=80",
+  "🐟": "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=300&q=80",
+  "🥗": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=300&q=80",
+  "🧃": "https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=300&q=80",
 };
 
 /* Fallback gradient palette when no photo matches */
@@ -83,8 +75,8 @@ function resolvePhoto(cat: Category): string | null {
   return null;
 }
 
-/* "All" hero image — coffee beans */
-const ALL_PHOTO = "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=300&q=80";
+/* "All" hero image — healthy bowl */
+const ALL_PHOTO = "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=300&q=80";
 
 export default function CategoryTabs({ categories, activeId, onSelect }: CategoryTabsProps) {
   const { lang } = useLanguage();
@@ -119,8 +111,8 @@ export default function CategoryTabs({ categories, activeId, onSelect }: Categor
         isActive={activeId === null}
         onClick={() => onSelect(null)}
         photoUrl={ALL_PHOTO}
-        fallbackGradient="linear-gradient(145deg,#3E2723,#795548)"
-        icon="☕"
+        fallbackGradient="linear-gradient(145deg,#1E4D0F,#62C71E)"
+        icon="🥗"
         name={lang === "ar" ? "الكل" : "All"}
       />
 
@@ -190,8 +182,8 @@ const CategoryCard = forwardRef<HTMLButtonElement, CardProps>(function CategoryC
             className="absolute inset-0"
             style={{
               background: isActive
-                ? "linear-gradient(to top, rgba(8,3,1,0.88) 0%, rgba(8,3,1,0.50) 50%, rgba(8,3,1,0.15) 100%)"
-                : "linear-gradient(to top, rgba(8,3,1,0.78) 0%, rgba(8,3,1,0.38) 50%, rgba(8,3,1,0.08) 100%)",
+                ? "linear-gradient(to top, rgba(4,10,3,0.88) 0%, rgba(4,10,3,0.50) 50%, rgba(4,10,3,0.15) 100%)"
+                : "linear-gradient(to top, rgba(4,10,3,0.78) 0%, rgba(4,10,3,0.38) 50%, rgba(4,10,3,0.08) 100%)",
             }}
           />
         </div>
@@ -240,7 +232,7 @@ const CategoryCard = forwardRef<HTMLButtonElement, CardProps>(function CategoryC
         <motion.span
           layoutId="cat-active-ring"
           className="absolute inset-0 rounded-[18px] border-[2.5px] border-primary"
-          style={{ boxShadow: "0 0 14px rgba(204,0,0,0.45)" }}
+          style={{ boxShadow: "0 0 14px rgba(98,199,30,0.45)" }}
           transition={{ type: "spring", stiffness: 500, damping: 35 }}
         />
       )}

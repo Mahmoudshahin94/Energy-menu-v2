@@ -3,23 +3,23 @@
 import { useState, useCallback } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { db } from "@/lib/db";
+import { useMenuData } from "@/lib/useMenuData";
+import { WHATSAPP_ORDER_HREF } from "@/lib/config";
 import { useLanguage } from "@/context/LanguageContext";
 import { useTheme } from "@/context/ThemeContext";
 import ImageCarousel from "@/components/menu/ImageCarousel";
 import type { MenuItem, Category, ItemImage } from "@/types";
 
-const WHATSAPP_ORDER_HREF = "https://wa.me/972524171936";
 
 const PLACEHOLDERS = [
-  { from: "#FFF3E8", to: "#FFD9B0", emoji: "☕" },
-  { from: "#FFF8E1", to: "#FFE082", emoji: "🍵" },
-  { from: "#FBE9E7", to: "#FFAB91", emoji: "🥤" },
-  { from: "#F3E5F5", to: "#CE93D8", emoji: "🧋" },
-  { from: "#E8F5E9", to: "#A5D6A7", emoji: "🍹" },
-  { from: "#E3F2FD", to: "#90CAF9", emoji: "🧃" },
-  { from: "#FCE4EC", to: "#F48FB1", emoji: "🍸" },
-  { from: "#E0F7FA", to: "#80DEEA", emoji: "🍰" },
+  { from: "#EAF7DD", to: "#BDE59A", emoji: "🥗" },
+  { from: "#FFF1DE", to: "#FFD39B", emoji: "🍗" },
+  { from: "#F1F8E9", to: "#C5E1A5", emoji: "🥪" },
+  { from: "#FFF3E0", to: "#FFCC80", emoji: "🍔" },
+  { from: "#E8F5E9", to: "#A5D6A7", emoji: "🍝" },
+  { from: "#FFF8E1", to: "#FFE082", emoji: "🧃" },
+  { from: "#E0F2E9", to: "#9ED8B8", emoji: "🐟" },
+  { from: "#FBE9E0", to: "#F4B393", emoji: "🥩" },
 ];
 
 function WhatsAppIcon() {
@@ -123,7 +123,7 @@ export default function ItemDetailPage({ params }: { params: { id: string } }) {
   const [selectedSize, setSelectedSize] = useState<"small" | "large" | null>(null);
   const [shared, setShared] = useState(false);
 
-  const { data, isLoading } = db.useQuery({ items: {}, categories: {}, item_images: {} });
+  const { data, isLoading } = useMenuData();
 
   const handleShare = useCallback(async (itemName: string) => {
     try {

@@ -93,7 +93,7 @@ export default function CategoryForm({
         <Field label="Icon (emoji)" error={errors.icon?.message}>
           <input
             {...register("icon")}
-            placeholder="☕"
+            placeholder="🥗"
             className={`${inputClass} text-center text-xl`}
           />
         </Field>

@@ -12,7 +12,7 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gray-50 flex" dir="ltr">
+    <div className="admin-light min-h-screen bg-gray-50 flex" dir="ltr">
       {/* Desktop sidebar */}
       <div className="hidden md:flex md:flex-shrink-0">
         <AdminSidebar />

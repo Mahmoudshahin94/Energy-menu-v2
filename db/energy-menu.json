@@ -1,0 +1,431 @@
+{
+  "categories": [
+    {
+      "key": "sandwiches",
+      "name_en": "Sandwiches",
+      "name_ar": "الساندويشات",
+      "icon": "🥪",
+      "order": 1
+    },
+    {
+      "key": "burgers",
+      "name_en": "Burger Meals",
+      "name_ar": "وجبات البرغر",
+      "icon": "🍔",
+      "order": 2
+    },
+    {
+      "key": "chicken",
+      "name_en": "Chicken Meals",
+      "name_ar": "وجبات الدجاج",
+      "icon": "🍗",
+      "order": 3
+    },
+    {
+      "key": "meat",
+      "name_en": "Meat Meals",
+      "name_ar": "وجبات اللحوم",
+      "icon": "🥩",
+      "order": 4
+    },
+    {
+      "key": "noodles",
+      "name_en": "Noodle Meals",
+      "name_ar": "وجبات النودلز",
+      "icon": "🍝",
+      "order": 5
+    },
+    {
+      "key": "fish",
+      "name_en": "Fish Meals",
+      "name_ar": "وجبات الأسماك",
+      "icon": "🐟",
+      "order": 6
+    },
+    {
+      "key": "salads",
+      "name_en": "Salads",
+      "name_ar": "سلطة",
+      "icon": "🥗",
+      "order": 7
+    },
+    {
+      "key": "juices",
+      "name_en": "Juices",
+      "name_ar": "العصائر",
+      "icon": "🧃",
+      "order": 8
+    }
+  ],
+  "items": [
+    {
+      "category": "sandwiches",
+      "name_ar": "ساندويش تونة",
+      "name_en": "Tuna sandwich",
+      "price": 20,
+      "order": 1,
+      "image": "https://images.unsplash.com/photo-1779914942318-494c24cd8530?w=600&q=85&auto=format&fit=crop",
+      "photo_id": "1779914942318-494c24cd8530"
+    },
+    {
+      "category": "sandwiches",
+      "name_ar": "فوكاتشا",
+      "name_en": "Focaccia",
+      "price": 25,
+      "order": 2,
+      "image": "https://images.unsplash.com/photo-1621852004158-f3bc188ace2d?w=600&q=85&auto=format&fit=crop",
+      "photo_id": "1621852004158-f3bc188ace2d"
+    },
+    {
+      "category": "sandwiches",
+      "name_ar": "ساندويش دجاج مشوي",
+      "name_en": "Grilled chicken sandwich",
+      "price": 20,
+      "order": 3,
+      "image": "https://images.unsplash.com/photo-1709689156424-16fe0e05b47b?w=600&q=85&auto=format&fit=crop",
+      "photo_id": "1709689156424-16fe0e05b47b"
+    },
+    {
+      "category": "sandwiches",
+      "name_ar": "ساندويش لحمة بالوايت صوص",
+      "name_en": "Beef sandwich with white sauce",
+      "price": 35,
+      "order": 4,
+      "image": "https://images.unsplash.com/photo-1554433607-66b5efe9d304?w=600&q=85&auto=format&fit=crop",
+      "photo_id": "1554433607-66b5efe9d304"
+    },
+    {
+      "category": "sandwiches",
+      "name_ar": "ساندويش لحمة بلبيستو",
+      "name_en": "Meat sandwich with pesto",
+      "price": 35,
+      "order": 5,
+      "image": "https://images.unsplash.com/photo-1699728088600-6d684acbeada?w=600&q=85&auto=format&fit=crop",
+      "photo_id": "1699728088600-6d684acbeada"
+    },
+    {
+      "category": "sandwiches",
+      "name_ar": "ساندويش دجاج بلبيستو",
+      "name_en": "Chicken Belpesto Sandwich",
+      "price": 25,
+      "order": 6,
+      "image": "https://images.unsplash.com/photo-1655279562015-047c3da9a271?w=600&q=85&auto=format&fit=crop",
+      "photo_id": "1655279562015-047c3da9a271"
+    },
+    {
+      "category": "sandwiches",
+      "name_ar": "ساندويش فاهيتا لحمة",
+      "name_en": "Beef fajita sandwich",
+      "price": 32,
+      "order": 7,
+      "image": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=600&q=85&auto=format&fit=crop",
+      "photo_id": "1529006557810-274b9b2fc783"
+    },
+    {
+      "category": "sandwiches",
+      "name_ar": "ساندويش فاهيتا دجاج",
+      "name_en": "Chicken Fajita Sandwich",
+      "price": 22,
+      "order": 8,
+      "image": "https://images.unsplash.com/photo-1666819615040-eff5e52c778a?w=600&q=85&auto=format&fit=crop",
+      "photo_id": "1666819615040-eff5e52c778a"
+    },
+    {
+      "category": "sandwiches",
+      "name_ar": "ساندويش دجاج بالوايت صوص",
+      "name_en": "Chicken sandwich with white sauce",
+      "price": 25,
+      "order": 9,
+      "image": "https://images.unsplash.com/photo-1754652327590-634bfebc7cf0?w=600&q=85&auto=format&fit=crop",
+      "photo_id": "1754652327590-634bfebc7cf0"
+    },
+    {
+      "category": "sandwiches",
+      "name_ar": "ساندويش دجاج كرسبي",
+      "name_en": "Crispy chicken sandwich",
+      "price": 22,
+      "order": 10,
+      "image": "https://images.unsplash.com/photo-1705131186176-1c7cdb830815?w=600&q=85&auto=format&fit=crop",
+      "photo_id": "1705131186176-1c7cdb830815"
+    },
+    {
+      "category": "juices",
+      "name_ar": "ليمون و نعنع",
+      "name_en": "Lemon and mint",
+      "price": 10,
+      "order": 1,
+      "image": "https://images.unsplash.com/photo-1555949366-819808d99159?w=600&q=85&auto=format&fit=crop",
+      "photo_id": "1555949366-819808d99159"
+    },
+    {
+      "category": "juices",
+      "name_ar": "برتقال",
+      "name_en": "Orange",
+      "price": 10,
+      "order": 2,
+      "image": "https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=600&q=85&auto=format&fit=crop",
+      "photo_id": "1600271886742-f049cd451bba"
+    },
+    {
+      "category": "juices",
+      "name_ar": "رمان",
+      "name_en": "Pomegranate",
+      "price": 15,
+      "order": 3,
+      "image": "https://images.unsplash.com/photo-1603028769333-009800f4e059?w=600&q=85&auto=format&fit=crop",
+      "photo_id": "1603028769333-009800f4e059"
+    },
+    {
+      "category": "juices",
+      "name_ar": "جزر",
+      "name_en": "Carrot",
+      "price": 10,
+      "order": 4,
+      "image": "https://images.unsplash.com/photo-1628961915805-4c92c885ce61?w=600&q=85&auto=format&fit=crop",
+      "photo_id": "1628961915805-4c92c885ce61"
+    },
+    {
+      "category": "salads",
+      "name_ar": "سيزر",
+      "name_en": "Caesar",
+      "price": 20,
+      "order": 1,
+      "image": "https://images.unsplash.com/photo-1746211108786-ca20c8f80ecd?w=600&q=85&auto=format&fit=crop",
+      "photo_id": "1746211108786-ca20c8f80ecd"
+    },
+    {
+      "category": "salads",
+      "name_ar": "يونانية",
+      "name_en": "Greek",
+      "price": 18,
+      "order": 2,
+      "image": "https://images.unsplash.com/photo-1769481614068-47cfb4d1f125?w=600&q=85&auto=format&fit=crop",
+      "photo_id": "1769481614068-47cfb4d1f125"
+    },
+    {
+      "category": "salads",
+      "name_ar": "حلومي مشوي",
+      "name_en": "Grilled halloumi",
+      "price": 21,
+      "order": 3,
+      "image": "https://images.unsplash.com/photo-1595587870672-c79b47875c6a?w=600&q=85&auto=format&fit=crop",
+      "photo_id": "1595587870672-c79b47875c6a"
+    },
+    {
+      "category": "salads",
+      "name_ar": "التبولة",
+      "name_en": "Tabbouleh",
+      "price": 15,
+      "order": 4,
+      "image": "https://images.unsplash.com/photo-1786174044919-c2119725afa1?w=600&q=85&auto=format&fit=crop",
+      "photo_id": "1786174044919-c2119725afa1"
+    },
+    {
+      "category": "salads",
+      "name_ar": "انيرجي",
+      "name_en": "Energy",
+      "price": 28,
+      "order": 5,
+      "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=85&auto=format&fit=crop",
+      "photo_id": "1546069901-ba9599a7e63c"
+    },
+    {
+      "category": "salads",
+      "name_ar": "الكينوا والعدس",
+      "name_en": "Quinoa and lentils",
+      "price": 18,
+      "order": 6,
+      "image": "https://images.unsplash.com/photo-1623428187969-5da2dcea5ebf?w=600&q=85&auto=format&fit=crop",
+      "photo_id": "1623428187969-5da2dcea5ebf"
+    },
+    {
+      "category": "salads",
+      "name_ar": "التونة",
+      "name_en": "Tuna",
+      "price": 20,
+      "order": 7,
+      "image": "https://images.unsplash.com/photo-1654171570628-e7a4602f56ad?w=600&q=85&auto=format&fit=crop",
+      "photo_id": "1654171570628-e7a4602f56ad"
+    },
+    {
+      "category": "noodles",
+      "name_ar": "فوتوشيني",
+      "name_en": "Fettuccine",
+      "price": 40,
+      "order": 1,
+      "image": "https://images.unsplash.com/photo-1761168941826-7efda859bdae?w=600&q=85&auto=format&fit=crop",
+      "photo_id": "1761168941826-7efda859bdae"
+    },
+    {
+      "category": "fish",
+      "name_ar": "جمبري بالوايت صوص",
+      "name_en": "Shrimp with white sauce",
+      "price": 40,
+      "order": 1,
+      "image": "https://images.unsplash.com/photo-1574653853117-0274131c2175?w=600&q=85&auto=format&fit=crop",
+      "photo_id": "1574653853117-0274131c2175"
+    },
+    {
+      "category": "burgers",
+      "name_ar": "بيف برغر",
+      "name_en": "Beef Burger",
+      "price": 27,
+      "order": 1,
+      "image": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&q=85&auto=format&fit=crop",
+      "photo_id": "1568901346375-23c9450c58cd"
+    },
+    {
+      "category": "burgers",
+      "name_ar": "برغر كرسبي",
+      "name_en": "Crispy burger",
+      "price": 22,
+      "order": 2,
+      "image": "https://images.unsplash.com/photo-1637710847214-f91d99669e18?w=600&q=85&auto=format&fit=crop",
+      "photo_id": "1637710847214-f91d99669e18"
+    },
+    {
+      "category": "burgers",
+      "name_ar": "برغر دجاج",
+      "name_en": "Chicken burger",
+      "price": 20,
+      "order": 3,
+      "image": "https://images.unsplash.com/photo-1671106571674-a89083d27e60?w=600&q=85&auto=format&fit=crop",
+      "photo_id": "1671106571674-a89083d27e60"
+    },
+    {
+      "category": "burgers",
+      "name_ar": "برغر ENERGY",
+      "name_en": "ENERGY Burger",
+      "price": 29,
+      "order": 4,
+      "image": "https://images.unsplash.com/photo-1607013251379-e6eecfffe234?w=600&q=85&auto=format&fit=crop",
+      "photo_id": "1607013251379-e6eecfffe234"
+    },
+    {
+      "category": "chicken",
+      "name_ar": "ستيك دجاج بالصوص لمون",
+      "name_en": "Chicken steak with lemon sauce",
+      "price": 28,
+      "order": 1,
+      "image": "https://images.unsplash.com/photo-1693820488674-4f8c98fbc0f9?w=600&q=85&auto=format&fit=crop",
+      "photo_id": "1693820488674-4f8c98fbc0f9"
+    },
+    {
+      "category": "chicken",
+      "name_ar": "ستراغنوف دجاج",
+      "name_en": "Chicken Stroganoff",
+      "price": 30,
+      "order": 2,
+      "image": "https://images.unsplash.com/photo-1707322540603-b6c343602676?w=600&q=85&auto=format&fit=crop",
+      "photo_id": "1707322540603-b6c343602676"
+    },
+    {
+      "category": "chicken",
+      "name_ar": "فاهيتا دجاج مع أرز",
+      "name_en": "Chicken fajitas with rice",
+      "price": 25,
+      "order": 3,
+      "image": "https://images.unsplash.com/photo-1625166913168-9135c6ffddcb?w=600&q=85&auto=format&fit=crop",
+      "photo_id": "1625166913168-9135c6ffddcb"
+    },
+    {
+      "category": "chicken",
+      "name_ar": "ستيك دجاج بالكاري",
+      "name_en": "Chicken curry steak",
+      "price": 28,
+      "order": 4,
+      "image": "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=600&q=85&auto=format&fit=crop",
+      "photo_id": "1603894584373-5ac82b2ae398"
+    },
+    {
+      "category": "chicken",
+      "name_ar": "ستيك جاج",
+      "name_en": "Chicken Steak",
+      "price": 25,
+      "order": 5,
+      "image": "https://images.unsplash.com/photo-1670398564097-0762e1b30b3a?w=600&q=85&auto=format&fit=crop",
+      "photo_id": "1670398564097-0762e1b30b3a"
+    },
+    {
+      "category": "chicken",
+      "name_ar": "ستيك دجاج بالوايت صوص",
+      "name_en": "Chicken steak with white sauce",
+      "price": 28,
+      "order": 6,
+      "image": "https://images.unsplash.com/photo-1788462612914-44793f2980f2?w=600&q=85&auto=format&fit=crop",
+      "photo_id": "1788462612914-44793f2980f2"
+    },
+    {
+      "category": "meat",
+      "name_ar": "ستراغانوف لحمة",
+      "name_en": "Stroganoff meat",
+      "price": 38,
+      "order": 1,
+      "image": "https://images.unsplash.com/photo-1644592219048-5c070fd3c91c?w=600&q=85&auto=format&fit=crop",
+      "photo_id": "1644592219048-5c070fd3c91c"
+    },
+    {
+      "category": "meat",
+      "name_ar": "ستيك فيليه بالوايت صوص",
+      "name_en": "Fillet steak with white sauce",
+      "price": 40,
+      "order": 2,
+      "image": "https://images.unsplash.com/photo-1706650616334-97875fae8521?w=600&q=85&auto=format&fit=crop",
+      "photo_id": "1706650616334-97875fae8521"
+    },
+    {
+      "category": "meat",
+      "name_ar": "فاهيتا لحمة مع أرز",
+      "name_en": "Beef fajitas with rice",
+      "price": 35,
+      "order": 3,
+      "image": "https://images.unsplash.com/photo-1636552550485-d18a8ca38daf?w=600&q=85&auto=format&fit=crop",
+      "photo_id": "1636552550485-d18a8ca38daf"
+    },
+    {
+      "category": "noodles",
+      "name_ar": "نودلز لحمة",
+      "name_en": "Meat noodles",
+      "price": 38,
+      "order": 2,
+      "image": "https://images.unsplash.com/photo-1565628308934-c731959645f2?w=600&q=85&auto=format&fit=crop",
+      "photo_id": "1565628308934-c731959645f2"
+    },
+    {
+      "category": "noodles",
+      "name_ar": "فوتوشيني مع جمبري",
+      "name_en": "Fettuccine with Shrimp",
+      "price": 49,
+      "order": 3,
+      "image": "https://images.unsplash.com/photo-1677681483419-e18aa1376db7?w=600&q=85&auto=format&fit=crop",
+      "photo_id": "1677681483419-e18aa1376db7"
+    },
+    {
+      "category": "noodles",
+      "name_ar": "نودلز دجاج",
+      "name_en": "Chicken noodles",
+      "price": 26,
+      "order": 4,
+      "image": "https://images.unsplash.com/photo-1781332152753-1199601d73d2?w=600&q=85&auto=format&fit=crop",
+      "photo_id": "1781332152753-1199601d73d2"
+    },
+    {
+      "category": "noodles",
+      "name_ar": "نودلز ساده",
+      "name_en": "Plain noodles",
+      "price": 20,
+      "order": 5,
+      "image": "https://images.unsplash.com/photo-1634864572865-1cf8ff8bd23d?w=600&q=85&auto=format&fit=crop",
+      "photo_id": "1634864572865-1cf8ff8bd23d"
+    },
+    {
+      "category": "fish",
+      "name_ar": "ستيك سلمون مشوي",
+      "name_en": "Grilled salmon steak",
+      "price": 40,
+      "order": 2,
+      "image": "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=600&q=85&auto=format&fit=crop",
+      "photo_id": "1519708227418-c8fd9a32b7a2"
+    }
+  ]
+}

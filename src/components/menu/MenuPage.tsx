@@ -3,7 +3,8 @@
 import { useState, useMemo, useRef, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { db } from "@/lib/db";
+import { useMenuData } from "@/lib/useMenuData";
+import { WHATSAPP_ORDER_HREF, WHATSAPP_DISPLAY } from "@/lib/config";
 import { useLanguage } from "@/context/LanguageContext";
 import { useTheme } from "@/context/ThemeContext";
 import CategoryTabs from "./CategoryTabs";
@@ -73,8 +74,6 @@ function SearchIcon() {
   );
 }
 
-const WHATSAPP_ORDER_HREF = "https://wa.me/972524171936";
-
 const DEFAULT_BRAND_LOGO = "/logo.png";
 
 function WhatsAppIcon({ className }: { className?: string }) {
@@ -94,13 +93,7 @@ export default function MenuPage() {
   const [isScrolled, setIsScrolled] = useState(false);
   const sectionRefs = useRef<Map<string, HTMLElement>>(new Map());
 
-  const { data, isLoading, error } = db.useQuery({
-    categories: {},
-    items: {},
-    settings: {},
-    banners: {},
-    item_images: {},
-  });
+  const { data, isLoading, error } = useMenuData();
 
   /* Scroll listener – shrink header */
   useEffect(() => {
@@ -332,11 +325,11 @@ export default function MenuPage() {
           {/* Decorative ambient glows */}
           <div
             className="hero-glow w-64 h-64 -top-16 -start-16"
-            style={{ background: "radial-gradient(circle, rgba(204,80,30,0.18) 0%, transparent 70%)", position: "absolute" }}
+            style={{ background: "radial-gradient(circle, rgba(98,199,30,0.20) 0%, transparent 70%)", position: "absolute" }}
           />
           <div
             className="hero-glow w-48 h-48 -bottom-8 -end-8"
-            style={{ background: "radial-gradient(circle, rgba(204,0,0,0.12) 0%, transparent 70%)", position: "absolute" }}
+            style={{ background: "radial-gradient(circle, rgba(247,148,29,0.16) 0%, transparent 70%)", position: "absolute" }}
           />
 
           <div className="relative z-10 flex flex-col items-center text-center px-4">
@@ -370,7 +363,7 @@ export default function MenuPage() {
                 <span className="text-sm font-semibold text-ink">{t("order_whatsapp")}</span>
               </span>
               <span className="text-xs font-medium text-ink-2 tabular-nums" dir="ltr">
-                +972 52-417-1936
+                {WHATSAPP_DISPLAY}
               </span>
             </motion.a>
 
@@ -464,7 +457,7 @@ export default function MenuPage() {
                   animate={{ opacity: 1, scale: 1 }}
                   className="text-center py-24"
                 >
-                  <div className="text-7xl mb-5 opacity-30">☕</div>
+                  <div className="text-7xl mb-5 opacity-30">🥗</div>
                   <p className="text-ink-2 font-semibold text-lg">{t("no_items")}</p>
                   {search && (
                     <button
@@ -503,7 +496,7 @@ export default function MenuPage() {
             >
               {groupedByCategory.length === 0 ? (
                 <div className="text-center py-24">
-                  <div className="text-7xl mb-5 opacity-25">☕</div>
+                  <div className="text-7xl mb-5 opacity-25">🥗</div>
                   <p className="text-ink-2 font-semibold">{t("no_items")}</p>
                   <p className="text-ink-3 text-sm mt-1.5">
                     {lang === "ar"

@@ -44,7 +44,7 @@ export default function AdminLoginPage() {
         {/* Logo */}
         <div className="text-center mb-8">
           <div className="relative w-32 h-32 mx-auto mb-4 rounded-2xl overflow-hidden bg-white/10 border border-white/20 shadow-xl">
-            <Image src="/logo.png" alt="JudyTech" fill className="object-contain p-2" sizes="128px" priority />
+            <Image src="/logo.png" alt="Energy" fill className="object-contain p-2" sizes="128px" priority />
           </div>
           <h1 className="text-2xl font-bold text-white tracking-tight">Admin Panel</h1>
           <p className="text-white/50 text-sm mt-1">Sign in to manage your menu</p>
@@ -79,7 +79,7 @@ export default function AdminLoginPage() {
                 onChange={(e) => setUsername(e.target.value)}
                 required
                 autoComplete="username"
-                placeholder="admin"
+                placeholder="Username"
                 className="w-full bg-white/10 border border-white/15 rounded-2xl px-4 py-3.5 text-white text-sm placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
               />
             </div>
@@ -139,7 +139,7 @@ export default function AdminLoginPage() {
           </form>
         </div>
 
-        <p className="text-center text-white/25 text-xs mt-5">Judy Tech — Admin Panel</p>
+        <p className="text-center text-white/25 text-xs mt-5">Energy — Admin Panel</p>
       </motion.div>
     </div>
   );

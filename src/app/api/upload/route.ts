@@ -1,50 +1,37 @@
 import { NextRequest, NextResponse } from "next/server";
-import crypto from "crypto";
+import { put } from "@vercel/blob";
+import { requireAdmin } from "@/lib/admin-guard";
+
+const MAX_BYTES = 8 * 1024 * 1024;
 
 export async function POST(req: NextRequest) {
+  const denied = await requireAdmin();
+  if (denied) return denied;
+
   try {
     const formData = await req.formData();
-    const file = formData.get("file") as File | null;
+    const file = formData.get("file");
 
-    if (!file) {
+    if (!(file instanceof File)) {
       return NextResponse.json({ error: "No file provided" }, { status: 400 });
     }
-
-    const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME?.trim();
-    const apiKey = process.env.CLOUDINARY_API_KEY?.trim();
-    const apiSecret = process.env.CLOUDINARY_API_SECRET?.trim();
-
-    if (!cloudName || !apiKey || !apiSecret) {
-      return NextResponse.json({ error: "Cloudinary not configured" }, { status: 500 });
+    if (!file.type.startsWith("image/")) {
+      return NextResponse.json({ error: "Only image files are allowed" }, { status: 400 });
+    }
+    if (file.size > MAX_BYTES) {
+      return NextResponse.json({ error: "Image is larger than 8 MB" }, { status: 413 });
+    }
+    if (!process.env.BLOB_READ_WRITE_TOKEN) {
+      return NextResponse.json({ error: "Image storage is not configured" }, { status: 500 });
     }
 
-    const timestamp = Math.floor(Date.now() / 1000).toString();
-    const signature = crypto
-      .createHash("sha256")
-      .update(`timestamp=${timestamp}${apiSecret}`)
-      .digest("hex");
+    const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_") || "image";
+    const blob = await put(`menu/${safeName}`, file, {
+      access: "public",
+      addRandomSuffix: true,
+    });
 
-    const uploadForm = new FormData();
-    uploadForm.append("file", file);
-    uploadForm.append("timestamp", timestamp);
-    uploadForm.append("api_key", apiKey);
-    uploadForm.append("signature", signature);
-
-    const res = await fetch(
-      `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
-      { method: "POST", body: uploadForm }
-    );
-
-    const data = await res.json();
-
-    if (!res.ok || data.error) {
-      return NextResponse.json(
-        { error: data.error?.message ?? "Upload failed" },
-        { status: res.status }
-      );
-    }
-
-    return NextResponse.json({ url: data.secure_url });
+    return NextResponse.json({ url: blob.url });
   } catch (err) {
     console.error("Upload error:", err);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });

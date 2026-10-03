@@ -18,7 +18,7 @@ export interface MenuItem {
   image?: string;
   available: boolean;
   order: number;
-  category_id?: string;
+  category_id?: string | null;
 }
 
 export interface Settings {

@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { id } from "@instantdb/react";
 import AdminLayout from "@/components/admin/AdminLayout";
 import Modal from "@/components/admin/Modal";
 import CategoryForm from "@/components/admin/CategoryForm";
-import { db } from "@/lib/db";
+import { useMenuData } from "@/lib/useMenuData";
+import { createRow, updateRow, deleteRow } from "@/lib/adminApi";
 import type { Category } from "@/types";
 
 export default function CategoriesPage() {
@@ -13,9 +13,9 @@ export default function CategoriesPage() {
   const [editCategory, setEditCategory] = useState<Category | null>(null);
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
-  const { data, isLoading } = db.useQuery({ categories: {} });
+  const { data, isLoading } = useMenuData();
   const categories: Category[] = data?.categories
-    ? [...data.categories].sort((a: Category, b: Category) => a.order - b.order)
+    ? [...data.categories].sort((a, b) => a.order - b.order)
     : [];
 
   const handleAdd = async (formData: {
@@ -25,16 +25,13 @@ export default function CategoriesPage() {
     order: number;
     active: boolean;
   }) => {
-    const newId = id();
-    await db.transact([
-      db.tx.categories[newId].update({
-        name_en: formData.name_en,
-        name_ar: formData.name_ar,
-        icon: formData.icon ?? "",
-        order: formData.order,
-        active: formData.active,
-      }),
-    ]);
+    await createRow("categories", {
+      name_en: formData.name_en,
+      name_ar: formData.name_ar,
+      icon: formData.icon ?? "",
+      order: formData.order,
+      active: formData.active,
+    });
     setShowAdd(false);
   };
 
@@ -46,29 +43,25 @@ export default function CategoriesPage() {
     active: boolean;
   }) => {
     if (!editCategory) return;
-    await db.transact([
-      db.tx.categories[editCategory.id].update({
-        name_en: formData.name_en,
-        name_ar: formData.name_ar,
-        icon: formData.icon ?? "",
-        order: formData.order,
-        active: formData.active,
-      }),
-    ]);
+    await updateRow("categories", editCategory.id, {
+      name_en: formData.name_en,
+      name_ar: formData.name_ar,
+      icon: formData.icon ?? "",
+      order: formData.order,
+      active: formData.active,
+    });
     setEditCategory(null);
   };
 
   const handleDelete = async (catId: string) => {
     if (!confirm("Delete this category? Items in this category will lose their category assignment.")) return;
     setDeletingId(catId);
-    await db.transact([db.tx.categories[catId].delete()]);
+    await deleteRow("categories", catId);
     setDeletingId(null);
   };
 
   const handleToggleActive = async (cat: Category) => {
-    await db.transact([
-      db.tx.categories[cat.id].update({ active: !cat.active }),
-    ]);
+    await updateRow("categories", cat.id, { active: !cat.active });
   };
 
   return (
