@@ -100,7 +100,9 @@ export default function ImageCarousel({
   }
 
   return (
-    <div className={`flex flex-col gap-2 ${className}`}>
+    // dir="ltr": slides are positioned with translateX(-index * 100%), which only works
+    // left-to-right. Without it the Arabic (RTL) page slides into empty space.
+    <div dir="ltr" className={`flex flex-col gap-2 ${className}`}>
       {/* Main image area */}
       <div className="relative overflow-hidden select-none flex-1 min-h-0">
         <div
