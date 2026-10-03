@@ -1,0 +1,276 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Design Tokens ──────────────────────────────── */
+:root {
+  --color-bg: #FAFAF7;
+  --color-surface: #FFFFFF;
+  --color-surface-2: #F5EDE0;
+  --color-border: #EDE5D8;
+  --color-ink: #1A0E07;
+  --color-ink-2: #7A6355;
+  --color-ink-3: #B09A85;
+  --color-primary: #CC0000;
+  --color-primary-dark: #AA0000;
+
+  --header-height: 64px;
+  --categories-height: 148px;
+}
+
+.dark {
+  --color-bg: #0F0A07;
+  --color-surface: #1C1007;
+  --color-surface-2: #2C1A0E;
+  --color-border: #3D2A1A;
+  --color-ink: #F5EAD7;
+  --color-ink-2: #C4A480;
+  --color-ink-3: #8A6E52;
+  --color-primary: #E53535;
+  --color-primary-dark: #FF4444;
+}
+
+/* ─── Base ──────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Language-specific fonts */
+:lang(ar), [dir="rtl"] {
+  font-family: var(--font-cairo), Tahoma, "Segoe UI", Arial, sans-serif;
+}
+:lang(en), [dir="ltr"] {
+  font-family: var(--font-poppins), system-ui, sans-serif;
+}
+
+/* ─── Scrollbars ─────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--color-ink-3); }
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+
+/* ─── Glass header ───────────────────────────────── */
+.glass-header {
+  background: rgba(250, 250, 247, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(237, 229, 216, 0.8);
+}
+.dark .glass-header {
+  background: rgba(15, 10, 7, 0.88);
+  border-bottom: 1px solid rgba(61, 42, 26, 0.8);
+}
+
+/* ─── Hero section ───────────────────────────────── */
+.hero-section {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, #FEF9F0 0%, #FAF5EB 50%, #FAF7F2 80%, transparent 100%);
+  padding-top: 2.5rem;
+  padding-bottom: 2rem;
+}
+.dark .hero-section {
+  background: linear-gradient(180deg, #1E120A 0%, #170D06 50%, #110A04 80%, transparent 100%);
+}
+
+/* Decorative circles in hero */
+.hero-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* ─── Hero logo container ────────────────────────── */
+.hero-logo-wrap {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  /* Subtle warm glow ring — no white background needed (logo is transparent) */
+  background: radial-gradient(circle at center, rgba(204, 80, 20, 0.08) 0%, transparent 75%);
+  animation: heroLogoIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.dark .hero-logo-wrap {
+  background: radial-gradient(circle at center, rgba(204, 60, 20, 0.15) 0%, transparent 75%);
+}
+
+/* Compact logo in header */
+.header-logo {
+  background: transparent;
+}
+
+@keyframes heroLogoIn {
+  0% { opacity: 0; transform: scale(0.7) translateY(16px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ─── Card ───────────────────────────────────────── */
+.menu-card {
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+  will-change: transform;
+  cursor: default;
+}
+.menu-card:hover {
+  transform: translateY(-6px) scale(1.015);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.13), 0 4px 12px rgba(204, 0, 0, 0.06);
+}
+.dark .menu-card:hover {
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55), 0 4px 12px rgba(204, 0, 0, 0.15);
+}
+.menu-card:active {
+  transform: scale(0.97);
+}
+
+/* ─── Category card ──────────────────────────────── */
+.cat-card {
+  flex-shrink: 0;
+  width: 96px;
+  min-height: 116px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 0.5rem 0.75rem;
+  gap: 0.25rem;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.22s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  overflow: hidden;
+  border: 2px solid transparent;
+}
+.cat-card:hover {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+}
+.cat-card:active {
+  transform: scale(0.95);
+}
+.cat-card.active {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(204, 0, 0, 0.15), 0 8px 24px rgba(204, 0, 0, 0.2);
+  transform: translateY(-2px) scale(1.04);
+}
+
+/* ─── Skeleton loader ────────────────────────────── */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-surface-2) 25%,
+    var(--color-border) 50%,
+    var(--color-surface-2) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite;
+}
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ─── Category pill (legacy) ──────────────────────── */
+.cat-pill {
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.cat-pill:active { transform: scale(0.95); }
+
+/* ─── Price badge ────────────────────────────────── */
+.price-badge {
+  background: color-mix(in srgb, var(--color-primary) 12%, transparent);
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+/* ─── Item size selector active state ────────────── */
+.item-size-active {
+  background: color-mix(in srgb, var(--color-primary) 7%, transparent);
+}
+
+/* ─── Input focus ────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* ─── Line clamp ─────────────────────────────────── */
+.line-clamp-1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+/* ─── Selection color ────────────────────────────── */
+::selection {
+  background: color-mix(in srgb, var(--color-primary) 20%, transparent);
+}
+
+/* ─── Item image shimmer overlay ─────────────────── */
+.img-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(20, 10, 5, 0.35) 0%,
+    transparent 60%
+  );
+}
+
+/* ─── Tagline fade-in ────────────────────────────── */
+.tagline-fade {
+  animation: taglineFade 0.6s ease 0.3s both;
+}
+@keyframes taglineFade {
+  0% { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Section reveal ─────────────────────────────── */
+.section-reveal {
+  animation: sectionReveal 0.45s ease both;
+}
+@keyframes sectionReveal {
+  0% { opacity: 0; transform: translateY(12px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Admin sidebar transitions ──────────────────── */
+.sidebar-enter   { transform: translateX(-100%); }
+.sidebar-enter-active { transform: translateX(0); transition: transform 0.3s ease; }
+.sidebar-exit    { transform: translateX(0); }
+.sidebar-exit-active  { transform: translateX(-100%); transition: transform 0.3s ease; }
+
+/* ─── Safe area helpers (item detail page) ───────── */
+.pt-safe { padding-top: max(1rem, env(safe-area-inset-top)); }
+.pb-safe { padding-bottom: max(1.25rem, env(safe-area-inset-bottom)); }
