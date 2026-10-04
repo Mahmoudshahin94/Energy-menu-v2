@@ -4,6 +4,7 @@ import "./globals.css";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { ToastProvider } from "@/context/ToastContext";
+import { CartProvider } from "@/context/CartContext";
 import SessionWrapper from "@/components/SessionWrapper";
 
 const poppins = Poppins({
@@ -41,7 +42,7 @@ export default function RootLayout({
           <ThemeProvider>
             <LanguageProvider>
               <ToastProvider>
-                {children}
+                <CartProvider>{children}</CartProvider>
               </ToastProvider>
             </LanguageProvider>
           </ThemeProvider>

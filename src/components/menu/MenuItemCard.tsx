@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import AddToCartControl from "@/components/cart/AddToCartControl";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
@@ -127,6 +128,9 @@ export default function MenuItemCard({ item, index, category, itemImages }: Menu
               </span>
             </div>
           )}
+
+          {/* Add to cart */}
+          <AddToCartControl item={item} />
         </div>
 
         {/* ── Content ── */}

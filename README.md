@@ -11,6 +11,9 @@ Live: https://energy-menu-v2.vercel.app
 - Arabic (RTL) / English toggle, dark / light theme (dark by default)
 - Admin dashboard: categories, items (multi-image), hero banners, settings, QR code
 - QR code page + print-ready `public/energy-menu-qr.png`
+- Cart + checkout: add items from the cards, cart icon in the header (only when the cart has items), per-item notes,
+  delivery address or restaurant pickup (optional arrival time), then the order is sent as a formatted WhatsApp message
+  (Arabic or English, matching the selected language). Delivery fees are not shown. Orders are not stored in the database.
 
 ## Tech stack
 

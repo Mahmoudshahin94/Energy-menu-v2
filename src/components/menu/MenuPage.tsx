@@ -11,6 +11,8 @@ import CategoryTabs from "./CategoryTabs";
 import SearchBar from "./SearchBar";
 import MenuItemCard from "./MenuItemCard";
 import LanguageToggle from "./LanguageToggle";
+import CartButton from "@/components/cart/CartButton";
+import CartDrawer from "@/components/cart/CartDrawer";
 import HeroBannerCarousel from "@/components/carousel/HeroBannerCarousel";
 import type { Category, MenuItem, Banner, ItemImage } from "@/types";
 
@@ -265,6 +267,7 @@ export default function MenuPage() {
 
           {/* Actions */}
           <div className="flex items-center gap-1.5 flex-shrink-0">
+            <CartButton />
             <button
               onClick={() => {
                 setShowSearch((v) => !v);
@@ -570,6 +573,8 @@ export default function MenuPage() {
 
         </AnimatePresence>
       </main>
+
+      <CartDrawer items={allItems} itemImages={allItemImages} />
 
       {/* ─── FOOTER ──────────────────────────────────── */}
       <footer className="border-t border-border py-8 text-center bg-surface-2/40">
