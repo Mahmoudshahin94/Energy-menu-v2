@@ -13,6 +13,8 @@ interface MenuItemCardProps {
   index: number;
   category?: Category;
   itemImages?: ItemImage[];
+  /** When false (store closed) the add-to-cart control is hidden. */
+  storeOpen?: boolean;
 }
 
 /* Warm gradient palettes cycled by index for items without images */
@@ -27,7 +29,7 @@ const PLACEHOLDERS = [
   { from: "#FBE9E0", to: "#F4B393", emoji: "🥩" },
 ];
 
-export default function MenuItemCard({ item, index, category, itemImages }: MenuItemCardProps) {
+export default function MenuItemCard({ item, index, category, itemImages, storeOpen = true }: MenuItemCardProps) {
   const { lang, t, isRTL } = useLanguage();
   const [imgError, setImgError] = useState(false);
 
@@ -130,7 +132,7 @@ export default function MenuItemCard({ item, index, category, itemImages }: Menu
           )}
 
           {/* Add to cart */}
-          <AddToCartControl item={item} />
+          {storeOpen && <AddToCartControl item={item} />}
         </div>
 
         {/* ── Content ── */}

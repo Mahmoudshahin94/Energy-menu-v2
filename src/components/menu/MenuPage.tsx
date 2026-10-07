@@ -11,8 +11,10 @@ import CategoryTabs from "./CategoryTabs";
 import SearchBar from "./SearchBar";
 import MenuItemCard from "./MenuItemCard";
 import LanguageToggle from "./LanguageToggle";
-import CartButton from "@/components/cart/CartButton";
-import CartDrawer from "@/components/cart/CartDrawer";
+import CartFloatingBar from "@/components/cart/CartFloatingBar";
+import SocialLinks from "./SocialLinks";
+import StoreStatusBadge from "./StoreStatusBadge";
+import { isStoreOpen } from "@/lib/store";
 import HeroBannerCarousel from "@/components/carousel/HeroBannerCarousel";
 import type { Category, MenuItem, Banner, ItemImage } from "@/types";
 
@@ -132,6 +134,8 @@ export default function MenuPage() {
     const ms = s ? parseInt(s.value, 10) : NaN;
     return isNaN(ms) ? 5000 : ms;
   }, [data?.settings]);
+
+  const storeOpen = useMemo(() => isStoreOpen(data?.settings), [data?.settings]);
 
   const hasActiveBanners = banners.some((b) => b.active);
 
@@ -267,7 +271,6 @@ export default function MenuPage() {
 
           {/* Actions */}
           <div className="flex items-center gap-1.5 flex-shrink-0">
-            <CartButton />
             <button
               onClick={() => {
                 setShowSearch((v) => !v);
@@ -322,6 +325,10 @@ export default function MenuPage() {
             lang={lang}
             isRTL={isRTL}
           />
+          <div className="flex flex-col items-center gap-3 pt-4">
+            <SocialLinks />
+            <StoreStatusBadge open={storeOpen} />
+          </div>
         </section>
       ) : (
         <section className="hero-section">
@@ -351,28 +358,9 @@ export default function MenuPage() {
               </div>
             </div>
 
-            {/* WhatsApp — order */}
-            <motion.a
-              href={WHATSAPP_ORDER_HREF}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4 inline-flex flex-col items-center gap-1 rounded-2xl px-4 py-2.5 text-center transition-colors hover:bg-black/[0.04] dark:hover:bg-white/[0.06] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, delay: 0.12 }}
-            >
-              <span className="inline-flex items-center gap-2 text-[#25D366]">
-                <WhatsAppIcon className="w-5 h-5 flex-shrink-0" />
-                <span className="text-sm font-semibold text-ink">{t("order_whatsapp")}</span>
-              </span>
-              <span className="text-xs font-medium text-ink-2 tabular-nums" dir="ltr">
-                {WHATSAPP_DISPLAY}
-              </span>
-            </motion.a>
-
             {/* Shop name */}
             <motion.h1
-              className="mt-4 text-2xl font-bold text-ink tracking-tight tagline-fade"
+              className="mt-5 text-2xl font-bold text-ink tracking-tight tagline-fade"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
@@ -389,6 +377,45 @@ export default function MenuPage() {
             >
               {t("tagline")}
             </motion.p>
+
+            {/* Social links */}
+            <motion.div
+              className="mt-4"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, delay: 0.45 }}
+            >
+              <SocialLinks />
+            </motion.div>
+
+            {/* WhatsApp — order */}
+            <motion.a
+              href={WHATSAPP_ORDER_HREF}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 inline-flex flex-col items-center gap-1 rounded-2xl px-4 py-2.5 text-center transition-colors hover:bg-black/[0.04] dark:hover:bg-white/[0.06] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, delay: 0.12 }}
+            >
+              <span className="inline-flex items-center gap-2 text-[#25D366]">
+                <WhatsAppIcon className="w-5 h-5 flex-shrink-0" />
+                <span className="text-sm font-semibold text-ink">{t("order_whatsapp")}</span>
+              </span>
+              <span className="text-xs font-medium text-ink-2 tabular-nums" dir="ltr">
+                {WHATSAPP_DISPLAY}
+              </span>
+            </motion.a>
+
+            {/* Store status */}
+            <motion.div
+              className="mt-3"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, delay: 0.55 }}
+            >
+              <StoreStatusBadge open={storeOpen} />
+            </motion.div>
 
             {/* Decorative divider */}
             <motion.div
@@ -479,6 +506,7 @@ export default function MenuPage() {
                       item={item}
                       index={i}
                       category={categories.find((c) => c.id === item.category_id)}
+                      storeOpen={storeOpen}
                       itemImages={allItemImages.filter((img) => img.item_id === item.id)}
                     />
                   ))}
@@ -550,6 +578,7 @@ export default function MenuPage() {
                           item={item}
                           index={i}
                           category={category}
+                          storeOpen={storeOpen}
                           itemImages={allItemImages.filter((img) => img.item_id === item.id)}
                         />
                       ))}
@@ -574,10 +603,10 @@ export default function MenuPage() {
         </AnimatePresence>
       </main>
 
-      <CartDrawer items={allItems} itemImages={allItemImages} />
+      <CartFloatingBar items={allItems} storeOpen={storeOpen} />
 
       {/* ─── FOOTER ──────────────────────────────────── */}
-      <footer className="border-t border-border py-8 text-center bg-surface-2/40">
+      <footer className="border-t border-border pt-8 pb-28 text-center bg-surface-2/40">
         <div className="flex items-center justify-center gap-2 text-ink-3 text-xs">
           <span className="font-extrabold text-primary text-sm">{t("site_name")}</span>
           <span className="text-border">·</span>

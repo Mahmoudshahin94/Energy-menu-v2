@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import AdminLayout from "@/components/admin/AdminLayout";
 import { useMenuData } from "@/lib/useMenuData";
+import StoreStatusCard from "@/components/admin/StoreStatusCard";
 
 interface StatCard {
   label: string;
@@ -113,6 +114,8 @@ export default function DashboardPage() {
             </div>
           </div>
         </div>
+
+        <StoreStatusCard settings={data?.settings} loading={isLoading} />
 
         {/* Stats */}
         {isLoading ? (

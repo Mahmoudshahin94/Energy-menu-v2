@@ -123,5 +123,11 @@
   "order_sent_title": "Almost done!",
   "order_sent_text": "WhatsApp opened with your order. Press Send there to confirm it with the restaurant.",
   "open_whatsapp_again": "Open WhatsApp again",
-  "item_unit": "each"
+  "item_unit": "each",
+  "store_open": "Open now",
+  "store_closed": "Closed",
+  "store_closed_notice": "We are currently closed — ordering is unavailable right now.",
+  "proceed_checkout_short": "Proceed to checkout",
+  "instagram": "Instagram",
+  "snapchat": "Snapchat"
 }

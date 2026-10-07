@@ -7,8 +7,7 @@ import { useMenuData } from "@/lib/useMenuData";
 import { useLanguage } from "@/context/LanguageContext";
 import { useTheme } from "@/context/ThemeContext";
 import ImageCarousel from "@/components/menu/ImageCarousel";
-import CartButton from "@/components/cart/CartButton";
-import CartDrawer from "@/components/cart/CartDrawer";
+import { isStoreOpen } from "@/lib/store";
 import DetailCartBar from "@/components/cart/DetailCartBar";
 import type { MenuItem, Category, ItemImage } from "@/types";
 
@@ -327,7 +326,7 @@ export default function ItemDetailPage({ params }: { params: { id: string } }) {
   const cartPrice = (cartSize ? displayPrice : item.price_large || item.price_small) ?? 0;
 
   const CtaButton = ({ className = "" }: { className?: string }) => (
-    <DetailCartBar item={item} size={cartSize} price={cartPrice} className={className} />
+    <DetailCartBar item={item} size={cartSize} price={cartPrice} className={className} storeOpen={isStoreOpen(data?.settings)} />
   );
 
   return (
@@ -349,7 +348,6 @@ export default function ItemDetailPage({ params }: { params: { id: string } }) {
         </Link>
 
         <div className="flex items-center gap-1">
-          <CartButton />
           {/* Share button */}
           <button
             onClick={() => handleShare(name)}
@@ -461,7 +459,6 @@ export default function ItemDetailPage({ params }: { params: { id: string } }) {
         </div>
       </div>
 
-      <CartDrawer items={data?.items ?? []} itemImages={allItemImages} />
     </div>
   );
 }

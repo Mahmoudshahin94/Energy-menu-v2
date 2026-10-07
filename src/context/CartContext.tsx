@@ -17,9 +17,6 @@ interface CartContextType {
   count: number;
   /** False until the saved cart has been read from localStorage. */
   ready: boolean;
-  drawerOpen: boolean;
-  openDrawer: () => void;
-  closeDrawer: () => void;
   getQty: (itemId: string, size?: PriceSize) => number;
   add: (itemId: string, size?: PriceSize) => void;
   setQty: (key: string, qty: number) => void;
@@ -31,9 +28,6 @@ const CartContext = createContext<CartContextType>({
   lines: [],
   count: 0,
   ready: false,
-  drawerOpen: false,
-  openDrawer: () => {},
-  closeDrawer: () => {},
   getQty: () => 0,
   add: () => {},
   setQty: () => {},
@@ -67,7 +61,6 @@ function readStored(): CartLine[] {
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [lines, setLines] = useState<CartLine[]>([]);
   const [ready, setReady] = useState(false);
-  const [drawerOpen, setDrawerOpen] = useState(false);
 
   useEffect(() => {
     setLines(readStored());
@@ -127,26 +120,18 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const count = useMemo(() => lines.reduce((sum, l) => sum + l.qty, 0), [lines]);
 
-  // An empty cart can't have an open drawer.
-  useEffect(() => {
-    if (count === 0) setDrawerOpen(false);
-  }, [count]);
-
   const value = useMemo<CartContextType>(
     () => ({
       lines,
       count,
       ready,
-      drawerOpen,
-      openDrawer: () => setDrawerOpen(true),
-      closeDrawer: () => setDrawerOpen(false),
       getQty,
       add,
       setQty,
       setNote,
       clear,
     }),
-    [lines, count, ready, drawerOpen, getQty, add, setQty, setNote, clear]
+    [lines, count, ready, getQty, add, setQty, setNote, clear]
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

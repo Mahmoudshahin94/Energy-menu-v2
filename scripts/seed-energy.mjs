@@ -58,6 +58,7 @@ const settings = {
   logo: "/logo.png",
   default_lang: "ar",
   carousel_interval: "5000",
+  store_open: "true",
 };
 for (const [key, value] of Object.entries(settings)) {
   queries.push(sql`

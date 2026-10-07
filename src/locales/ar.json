@@ -123,5 +123,11 @@
   "order_sent_title": "اقتربنا من الانتهاء!",
   "order_sent_text": "تم فتح واتساب مع طلبك. اضغط إرسال هناك لتأكيد الطلب مع المطعم.",
   "open_whatsapp_again": "فتح واتساب مرة أخرى",
-  "item_unit": "للقطعة"
+  "item_unit": "للقطعة",
+  "store_open": "مفتوح الآن",
+  "store_closed": "مغلق حالياً",
+  "store_closed_notice": "نحن مغلقون حالياً — الطلب غير متاح الآن.",
+  "proceed_checkout_short": "متابعة إلى إتمام الطلب",
+  "instagram": "إنستغرام",
+  "snapchat": "سناب شات"
 }

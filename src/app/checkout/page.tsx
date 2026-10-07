@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { useCart } from "@/context/CartContext";
 import { useLanguage } from "@/context/LanguageContext";
 import { useMenuData } from "@/lib/useMenuData";
+import { isStoreOpen } from "@/lib/store";
 import {
   MAX_NOTE_LENGTH,
   formatPrice,
@@ -86,6 +87,7 @@ export default function CheckoutPage() {
   const [removedNotice, setRemovedNotice] = useState(false);
   const [sentUrl, setSentUrl] = useState<string | null>(null);
 
+  const storeOpen = useMemo(() => isStoreOpen(data?.settings), [data?.settings]);
   const items = useMemo(() => data?.items ?? [], [data?.items]);
   const itemImages = useMemo(() => data?.item_images ?? [], [data?.item_images]);
   const resolved = useMemo(() => resolveCartLines(lines, items), [lines, items]);
@@ -107,6 +109,7 @@ export default function CheckoutPage() {
     });
 
   const placeOrder = () => {
+    if (!storeOpen) return;
     const nextErrors: { name?: string; address?: string } = {};
     if (!name.trim()) nextErrors.name = t("err_name");
     if (mode === "delivery" && !address.trim()) nextErrors.address = t("err_address");
@@ -201,6 +204,11 @@ export default function CheckoutPage() {
           </div>
         ) : (
           <>
+            {!storeOpen && (
+              <div role="alert" className="rounded-2xl border border-red-500/40 bg-red-500/10 text-red-600 dark:text-red-400 text-sm font-semibold px-4 py-3">
+                {t("store_closed_notice")}
+              </div>
+            )}
             {removedNotice && (
               <div className="rounded-2xl border border-amber-500/40 bg-amber-500/10 text-amber-600 dark:text-amber-400 text-sm px-4 py-3">
                 {t("items_removed_notice")}
@@ -369,7 +377,8 @@ export default function CheckoutPage() {
           <button
             type="button"
             onClick={placeOrder}
-            className="max-w-xl mx-auto flex items-center justify-center gap-2.5 w-full rounded-2xl bg-[#25D366] hover:bg-[#1ebe5d] active:scale-[0.98] text-white font-bold text-[15px] transition-all shadow-lg shadow-green-500/20 py-4"
+            disabled={!storeOpen}
+            className="max-w-xl mx-auto flex items-center justify-center gap-2.5 w-full rounded-2xl bg-[#25D366] hover:bg-[#1ebe5d] active:scale-[0.98] text-white font-bold text-[15px] transition-all shadow-lg shadow-green-500/20 py-4 disabled:bg-surface-2 disabled:text-ink-3 disabled:shadow-none disabled:cursor-not-allowed disabled:active:scale-100"
           >
             <WhatsAppIcon />
             {t("place_order")}
